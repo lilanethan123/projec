@@ -34,13 +34,15 @@
           background: #000;
         }
 
+        /* This makes the iframe behave like a background video (cover) */
         .video-wrap {
           position: absolute;
           inset: 0;
           overflow: hidden;
+          /* Scale up to hide UI elements if parameters aren't enough */
+          transform: scale(1.1); 
         }
 
-        .parallax-video,
         .yt-bg {
           position: absolute;
           top: 50%;
@@ -56,7 +58,6 @@
 
         /* For super-wide screens, switch scaling so it still covers */
         @media (min-aspect-ratio: 16/9) {
-          .parallax-video,
           .yt-bg {
             width: 100vw;
             height: 56.25vw;  /* 100 * (9/16) */
@@ -287,7 +288,7 @@
             -->
             <iframe 
                 class="yt-bg" 
-                src="https://www.youtube.com/embed/FJ3N_2r6R-o?autoplay=1&mute=1&loop=1&playlist=FJ3N_2r6R-o&controls=0&rel=0&disablekb=1&modestbranding=1&playsinline=1"
+                src="https://www.youtube.com/embed/FJ3N_2r6R-o?autoplay=1&mute=1&loop=1&playlist=FJ3N_2r6R-o&controls=0&rel=0&disablekb=1&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0&autohide=1"
                 title="Adolf Hitler Speech 1935"
                 frameborder="0"
                 allow="autoplay; encrypted-media; fullscreen"
@@ -318,7 +319,7 @@
           <div class="video-wrap">
             <iframe
               class="yt-bg"
-              src="https://www.youtube.com/embed/YkpfsTWOGJ0?autoplay=1&mute=1&loop=1&playlist=YkpfsTWOGJ0&controls=0&rel=0&modestbranding=1&playsinline=1&fs=1&disablekb=1"
+              src="https://www.youtube.com/embed/YkpfsTWOGJ0?autoplay=1&mute=1&loop=1&playlist=YkpfsTWOGJ0&controls=0&rel=0&modestbranding=1&playsinline=1&fs=1&disablekb=1&iv_load_policy=3&showinfo=0&autohide=1"
               title="Berlin Street Scenes"
               frameborder="0"
               allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
@@ -349,7 +350,7 @@
         <div class="img-container reveal video-container">
             <iframe
                 class="parallax-video"
-                src="https://www.youtube.com/embed/PkQ8uFiqx4k?start=219&autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1"
+                src="https://www.youtube.com/embed/PkQ8uFiqx4k?start=219&autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&showinfo=0&autohide=1"
                 title="Winston Churchill VE Day Message"
                 frameborder="0"
                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
@@ -386,7 +387,7 @@
             </div>
         </div>
         <div class="img-container reveal">
-            <img src="@assets/generated_images/dramatic_historical_crowd_in_nuremberg.png" class="parallax-img" alt="Historical Crowd">
+            <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2016/01/01/18/Nazis.jpg" class="parallax-img" alt="Historical Crowd">
         </div>
     </section>
 
