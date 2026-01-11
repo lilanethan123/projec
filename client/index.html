@@ -17,6 +17,15 @@
             --border-color: #1a1a1a;
         }
 
+        /* HIDE SCROLLBAR */
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -29,6 +38,7 @@
             color: var(--text-color);
             line-height: 1.8;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4 {
@@ -59,18 +69,23 @@
             width: 0%;
         }
 
-        /* Navigation */
+        /* Dramatic Entrance Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 2rem 5%;
+            padding: 3rem 5%;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(5,5,5,1), rgba(5,5,5,0));
-            transition: 0.5s;
+            background: transparent;
+            transform: translateY(-100%);
+            animation: navSlideDown 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
+        }
+
+        @keyframes navSlideDown {
+            to { transform: translateY(0); }
         }
 
         nav.scrolled {
@@ -82,7 +97,7 @@
         .logo { font-size: 1.5rem; letter-spacing: 5px; color: var(--accent-color); text-decoration: none; }
         .nav-links a { margin-left: 2rem; color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* Hero */
+        /* Dramatic Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -97,35 +112,70 @@
         .hero h1 { font-size: 8vw; line-height: 1; margin-bottom: 2rem; }
         .hero .char { display: inline-block; opacity: 0; transform: translateY(100px); }
 
-        /* Sections */
+        /* Dramatic Content Sections */
         section { padding: 15rem 10% 10rem; position: relative; }
-        .section-num { font-size: 10rem; position: absolute; top: 5rem; left: 5%; opacity: 0.03; font-weight: 900; pointer-events: none; }
+        
+        /* Dramatic Section Numbers */
+        .section-num { 
+            font-size: 15rem; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            opacity: 0.05; 
+            font-weight: 900; 
+            pointer-events: none; 
+            color: var(--accent-color);
+            transition: 1s ease;
+        }
+        
+        section:hover .section-num {
+            opacity: 0.08;
+            transform: translateX(20px);
+        }
 
-        .reveal { opacity: 0; transform: translateY(50px); transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Reveal Animation - Dramatic Upgrade */
+        .reveal { 
+            opacity: 0; 
+            transform: scale(0.95) translateY(100px); 
+            filter: blur(10px);
+            transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: scale(1) translateY(0); 
+            filter: blur(0);
+        }
 
-        /* Parallax Image */
+        /* Dramatic Image Zoom Reveal */
         .img-container {
             width: 100%;
-            height: 60vh;
+            height: 70vh;
             overflow: hidden;
-            margin: 5rem 0;
+            margin: 8rem 0;
             position: relative;
+            clip-path: inset(10% 10% 10% 10%);
+            transition: clip-path 2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .img-container.active {
+            clip-path: inset(0% 0% 0% 0%);
         }
 
         .parallax-img {
             width: 100%;
-            height: 120%;
+            height: 140%;
             object-fit: cover;
             position: absolute;
-            top: -10%;
-            filter: grayscale(1) brightness(0.6);
-            transition: filter 0.5s;
+            top: -20%;
+            filter: grayscale(1) brightness(0.4) contrast(1.2);
+            transition: filter 1s ease;
         }
 
-        .img-container:hover .parallax-img { filter: grayscale(0.5) brightness(0.8); }
+        .img-container:hover .parallax-img { 
+            filter: grayscale(0.2) brightness(0.7) contrast(1.1); 
+        }
 
-        /* Content */
+        /* Layout */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
         .sticky-col { position: sticky; top: 10rem; }
 
@@ -136,6 +186,7 @@
             overflow-x: auto;
             padding: 2rem 0;
             scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         .witness-wrapper::-webkit-scrollbar { display: none; }
 
@@ -144,9 +195,13 @@
             background: var(--card-bg);
             padding: 3rem;
             border: 1px solid var(--border-color);
-            transition: 0.5s;
+            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .witness-card:hover { border-color: var(--accent-color); background: #121212; }
+        .witness-card:hover { 
+            border-color: var(--accent-color); 
+            background: #121212;
+            transform: scale(1.05) translateY(-10px);
+        }
 
         /* Footnotes */
         .footnote { font-size: 0.7rem; color: #444; margin-top: 5rem; border-top: 1px solid #111; padding-top: 1rem; }
@@ -219,6 +274,9 @@
                 </div>
             </div>
         </div>
+        <div class="img-container reveal">
+            <img src="https://images.unsplash.com/photo-1518467166778-b88f373ffec7?q=80&w=2000" class="parallax-img" alt="Historical Crowd">
+        </div>
     </section>
 
     <section id="witnesses">
@@ -286,7 +344,7 @@
             });
         }, 100);
 
-        // Scroll Progress & Nav Change
+        // Scroll Progress & Nav Change & Parallax
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -297,15 +355,15 @@
             if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
 
-            // Parallax
+            // Parallax with rotation and scaling for drama
             document.querySelectorAll('.parallax-img').forEach(img => {
                 const speed = 0.5;
                 const offset = window.pageYOffset * speed;
-                img.style.transform = `translateY(${offset * 0.1}px)`;
+                img.style.transform = `translateY(${offset * 0.1}px) scale(1.1)`;
             });
         });
 
-        // Reveal Observer
+        // Advanced Reveal Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -314,7 +372,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .img-container').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
