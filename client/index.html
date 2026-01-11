@@ -26,6 +26,42 @@
             display: none;
         }
 
+        .video-hero {
+          position: relative;
+          height: 100vh;      /* full screen */
+          width: 100%;
+          overflow: hidden;
+          background: #000;
+        }
+
+        /* This makes the iframe behave like a background video (cover) */
+        .video-wrap {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        .yt-bg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 177.78vh;    /* 100 * (16/9) */
+          height: 100vh;
+          transform: translate(-50%, -50%);
+          border: 0;
+
+          /* stops hover/click overlays from appearing */
+          pointer-events: none;
+        }
+
+        /* For super-wide screens, switch scaling so it still covers */
+        @media (min-aspect-ratio: 16/9) {
+          .yt-bg {
+            width: 100vw;
+            height: 56.25vw;  /* 100 * (9/16) */
+          }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -238,9 +274,27 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <h1 id="hero-title">SHADOWS OF POWER</h1>
-        <p class="reveal">A chronological study of the collapse of the Weimar Republic and the rise of the Third Reich.</p>
+    <header class="hero video-hero">
+        <div class="video-wrap">
+            <!-- 
+                Replace VIDEO_ID with your YouTube video ID. 
+                Parameters used: 
+                - autoplay=1 & mute=1 (required for autoplay)
+                - loop=1 & playlist=VIDEO_ID (required for looping)
+                - controls=0 & showinfo=0 & rel=0 (to hide UI)
+                - disablekb=1 (disable keyboard interactions)
+            -->
+            <iframe 
+                class="yt-bg" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&enablejsapi=1&disablekb=1&modestbranding=1" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div style="position: relative; z-index: 1;">
+            <h1 id="hero-title">SHADOWS OF POWER</h1>
+            <p class="reveal">A chronological study of the collapse of the Weimar Republic and the rise of the Third Reich.</p>
+        </div>
     </header>
 
     <section id="prologue">
@@ -256,9 +310,20 @@
                 <p>WWI soldiers returned with injuries and brought a pandemic that killed more people than the war itself. The roaring 20's followed as a prosperous time, but it was built on credit—a fragile foundation for the catastrophe to come.</p>
             </div>
         </div>
-        <div class="img-container reveal">
-            <img src="@assets/generated_images/cinematic_1930s_berlin_street_scene.png" class="parallax-img" alt="Historical Berlin">
-        </div>
+        <section class="video-hero reveal">
+          <div class="video-wrap">
+            <iframe
+              class="yt-bg"
+              src="https://www.youtube.com/embed/YkpfsTWOGJ0?autoplay=1&mute=1&loop=1&playlist=YkpfsTWOGJ0&controls=0&rel=0&modestbranding=1&playsinline=1&fs=1&disablekb=1"
+              title="Berlin Street Scenes"
+              frameborder="0"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </section>
+
+
     </section>
 
     <section id="depression" style="background: #080808;">
