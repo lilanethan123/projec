@@ -34,13 +34,13 @@
           background: #000;
         }
 
-        /* This makes the iframe behave like a background video (cover) */
         .video-wrap {
           position: absolute;
           inset: 0;
           overflow: hidden;
         }
 
+        .parallax-video,
         .yt-bg {
           position: absolute;
           top: 50%;
@@ -56,6 +56,7 @@
 
         /* For super-wide screens, switch scaling so it still covers */
         @media (min-aspect-ratio: 16/9) {
+          .parallax-video,
           .yt-bg {
             width: 100vw;
             height: 56.25vw;  /* 100 * (9/16) */
@@ -286,10 +287,13 @@
             -->
             <iframe 
                 class="yt-bg" 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&enablejsapi=1&disablekb=1&modestbranding=1" 
-                allow="autoplay; encrypted-media" 
+                src="https://www.youtube.com/embed/FJ3N_2r6R-o?autoplay=1&mute=1&loop=1&playlist=FJ3N_2r6R-o&controls=0&rel=0&disablekb=1&modestbranding=1&playsinline=1"
+                title="Adolf Hitler Speech 1935"
+                frameborder="0"
+                allow="autoplay; encrypted-media; fullscreen"
                 allowfullscreen>
             </iframe>
+
         </div>
         <div style="position: relative; z-index: 1;">
             <h1 id="hero-title">SHADOWS OF POWER</h1>
@@ -338,13 +342,21 @@
                 <h2>Economic Collapse</h2>
                 <p class="muted-text">1929 — 1940</p>
                 <div style="margin-top: 2rem; width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-                    <video src="@assets/generated_videos/cinematic_historical_archive_footage_loop.mp4" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(1) contrast(1.2);"></video>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Unemployed_men_queued_outside_a_depression_soup_kitchen_opened_in_Chicago_by_Al_Capone%2C_02-1931_-_NARA_-_541927.jpg" playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(1) contrast(1.2);"></video>
                 </div>
             </div>
         </div>
-        <div class="img-container reveal">
-            <img src="@assets/generated_images/vintage_typewriter_and_historical_documents.png" class="parallax-img" alt="Depression Era">
+        <div class="img-container reveal video-container">
+            <iframe
+                class="parallax-video"
+                src="https://www.youtube.com/embed/PkQ8uFiqx4k?start=219&autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&disablekb=1"
+                title="Winston Churchill VE Day Message"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowfullscreen>
+            </iframe>
         </div>
+
     </section>
 
     <section id="descent">
