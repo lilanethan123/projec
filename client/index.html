@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Shadow of the Twentieth Century</title>
+    <title>Chronicles of the Mid-20th Century</title>
+    <!-- Google Fonts for professional typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --text-color: #d1d1d1;
-            --accent-color: #96281b;
-            --secondary-bg: #141414;
-            --card-bg: #1a1a1a;
+            --bg-color: #0d0d0d;
+            --text-color: #f2f2f2;
+            --muted-text: #a0a0a0;
+            --accent-color: #b22222; /* Deep Red Crimson */
+            --accent-hover: #8b0000;
+            --card-bg: #161616;
+            --border-color: #2a2a2a;
+            --transition-speed: 0.8s;
         }
 
         * {
@@ -20,199 +27,235 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Source Sans Pro', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Smooth Transitions & Scrolling */
-        html {
-            scroll-behavior: smooth;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
         /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 1.2rem;
+            padding: 1.5rem 5%;
             z-index: 1000;
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #333;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: saturate(180%) blur(15px);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        nav a {
-            color: #888;
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--muted-text);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             letter-spacing: 2px;
-            transition: all 0.4s ease;
+            transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--accent-color);
-            letter-spacing: 3px;
+        .nav-links a:hover {
+            color: var(--text-color);
         }
 
         /* Hero Section */
-        header {
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1548543604-a87c9909abec?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1518467166778-b88f373ffec7?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
             text-align: center;
-            padding: 2rem;
+            padding: 0 10%;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(150, 40, 27, 0.5);
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroFadeIn 1.2s forwards 0.5s;
         }
 
-        .hero-subtitle {
-            font-style: italic;
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--muted-text);
+            max-width: 700px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeIn 1.2s forwards 0.8s;
         }
 
-        /* Content Sections */
+        @keyframes heroFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main Content */
         section {
-            padding: 8rem 10% 4rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        section:nth-child(even) {
-            background-color: var(--secondary-bg);
-        }
-
-        .container {
-            max-width: 1100px;
+            padding: 10rem 5% 6rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        h2 {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
+        .section-header {
+            margin-bottom: 5rem;
+            text-align: center;
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
+        .section-header h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .section-header .line {
+            width: 80px;
             height: 3px;
-            background-color: var(--accent-color);
+            background: var(--accent-color);
+            margin: 0 auto;
         }
 
-        .content-grid {
+        /* Layout Grids */
+        .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 6rem;
             align-items: center;
+            margin-bottom: 8rem;
         }
 
-        .text-block p {
+        .reverse { direction: rtl; }
+        .reverse > * { direction: ltr; }
+
+        .text-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        .text-content p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
             text-align: justify;
         }
 
-        .image-box {
+        .visual-container {
             position: relative;
+            border-radius: 8px;
             overflow: hidden;
-            border-radius: 4px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
 
-        .image-box:hover {
-            transform: scale(1.02);
-        }
-
-        .image-box img {
+        .visual-container img {
             width: 100%;
             height: auto;
             display: block;
-            filter: grayscale(80%) sepia(20%);
-            transition: filter 0.6s ease;
+            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: contrast(1.1) brightness(0.9);
         }
 
-        .image-box:hover img {
-            filter: grayscale(0%) sepia(0%);
+        .visual-container:hover img {
+            transform: scale(1.08);
         }
 
-        /* Quote Styling */
-        .quote-box {
-            border-left: 4px solid var(--accent-color);
-            padding: 2rem;
-            background: var(--card-bg);
-            margin: 2rem 0;
-            font-style: italic;
-        }
-
-        .quote-author {
-            display: block;
-            margin-top: 1rem;
-            font-style: normal;
-            font-weight: bold;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Witness Cards */
-        .witness-grid {
+        /* Witness Profiles */
+        .profiles {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
 
-        .witness-card {
+        .profile-card {
             background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 4px;
-            border: 1px solid #222;
-            transition: all 0.4s ease;
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .witness-card:hover {
+        .profile-card:hover {
+            transform: translateY(-15px);
             border-color: var(--accent-color);
-            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
         }
 
-        .witness-card h3 {
+        .profile-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
             color: var(--accent-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
         }
 
-        /* Scroll Reveal Utility */
+        .profile-card .role {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--muted-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .quote {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+            font-style: italic;
+            color: var(--muted-text);
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            opacity: 0.1;
+            font-family: serif;
+        }
+
+        /* Scroll Animation Utility */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            transform: translateY(40px);
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .reveal.active {
@@ -222,135 +265,178 @@
 
         /* Footer */
         footer {
-            padding: 4rem;
             background: #000;
+            padding: 6rem 5% 2rem;
             text-align: center;
-            border-top: 1px solid #222;
+            border-top: 1px solid var(--border-color);
         }
 
-        .source-link {
-            color: #666;
+        .footer-nav {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .footer-nav a {
+            color: var(--muted-text);
             text-decoration: none;
-            font-size: 0.8rem;
-            margin: 0 10px;
+            font-size: 0.85rem;
+            transition: color 0.3s;
         }
 
-        @media (max-width: 900px) {
-            .content-grid { grid-template-columns: 1fr; }
-            section { padding-top: 6rem; }
+        .footer-nav a:hover { color: #fff; }
+
+        .copyright {
+            color: #444;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 1024px) {
+            .grid { grid-template-columns: 1fr; gap: 4rem; }
+            .section-header h2 { font-size: 2.5rem; }
+            .hero h1 { font-size: 4rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#rise">The Rise</a>
-        <a href="#witnesses">Witnesses</a>
-        <a href="#isolation">FDR & Isolation</a>
+        <a href="#" class="logo">CHRONICLES</a>
+        <div class="nav-links">
+            <a href="#rise">The Rise</a>
+            <a href="#witnesses">Witnesses</a>
+            <a href="#isolation">Diplomacy</a>
+        </div>
     </nav>
 
-    <header id="home">
-        <h1 class="reveal">A Dark Horizon</h1>
-        <p class="hero-subtitle reveal">Germany 1918 - 1945</p>
-        <p class="reveal" style="max-width: 600px;">An exploration of the rise of totalitarianism, the primary witnesses of the era, and the global response.</p>
+    <header class="hero">
+        <h1>Echoes of History</h1>
+        <p>A curated examination of power, persuasion, and the global collapse between 1918 and 1945.</p>
     </header>
 
     <section id="rise">
-        <div class="container">
-            <h2 class="reveal">The Rise to Power</h2>
-            <div class="content-grid">
-                <div class="text-block reveal">
-                    <p>
-                        Adolf Hitler, named the “Fuhrer” (leader), was born in April 1889 in Braunau am Inn. After serving in WWI, he found his voice in the DAP (German Workers' Party), eventually transforming it into the National Socialist German Workers' Party.
-                    </p>
-                    <p>
-                        Through powerful oratory and aggressive political maneuvering, he rose from an unofficial leader in 1921 to the indefinite leader of Germany by 1933. His promotion was fueled by a promise to restore German pride after the perceived humiliation of the Great War.
-                    </p>
-                </div>
-                <div class="image-box reveal">
-                    <img id="img-berlin" src="@assets/stock_images/historical-berlin-1930s-architecture.jpg" alt="Historical Berlin Architecture">
-                </div>
+        <div class="section-header reveal">
+            <h2>The Ascent of Power</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="grid">
+            <div class="text-content reveal">
+                <h3>The DAP Transformation</h3>
+                <p>
+                    Adolf Hitler, a decorated veteran of the First World War, rose to prominence within the German Workers' Party (DAP) through his extraordinary oratory skills. By 1921, he had secured his position as the group's absolute authority, renaming it the National Socialist German Workers' Party (NSDAP).
+                </p>
+                <p>
+                    His rhetoric focused on the perceived betrayal of the Weimar Republic and a promise of national resurgence. This period marked the beginning of a systematic dismantling of democratic institutions, leading to his appointment as Chancellor in 1933.
+                </p>
+            </div>
+            <div class="visual-container reveal">
+                <img src="https://images.unsplash.com/photo-1549247796-5d8f09e9034b?q=80&w=1200&auto=format&fit=crop" alt="Historical Government Architecture">
             </div>
         </div>
     </section>
 
-    <section id="witnesses">
-        <div class="container">
-            <h2 class="reveal">Primary Witnesses</h2>
-            <div class="witness-grid">
-                <!-- Winston Churchill -->
-                <div class="witness-card reveal">
-                    <h3>Winston Churchill</h3>
-                    <p>The British leader who watched closely as the shadow lengthened. While others hoped for peace, Churchill warned that the fascist government was "very dangerous," describing Nazi aggression as a threat to global stability long before the first shots were fired.</p>
-                </div>
+    <section id="witnesses" style="background: var(--secondary-bg);">
+        <div class="section-header reveal">
+            <h2>Primary Testimonies</h2>
+            <div class="line"></div>
+        </div>
 
-                <!-- Joseph Goebbels -->
-                <div class="witness-card reveal">
-                    <h3>Joseph Goebbels</h3>
-                    <p>The architect of propaganda. He viewed the press as a "keyboard" for the government. His machinery of persuasion utilized cognitive biases and emotional responses to sway an entire nation, believing that "the moment one becomes aware of propaganda, it loses its effectiveness."</p>
-                    <div class="quote-box">
-                        "Think of the press as a great keyboard on which the government can play."
-                        <span class="quote-author">- Joseph Goebbels</span>
-                    </div>
+        <div class="profiles">
+            <div class="profile-card reveal">
+                <span class="role">The Resister</span>
+                <h4>Winston Churchill</h4>
+                <p>The British statesman who stood as a lone voice in the wilderness during the 1930s. He warned that the new regime in Germany was not merely a local political shift, but a systemic threat to Western civilization.</p>
+                <div class="quote">
+                    "I see the shadow of the twentieth century lengthening over us."
                 </div>
+            </div>
 
-                <!-- Dr. Josef Mengele -->
-                <div class="witness-card reveal">
-                    <h3>Dr. Josef Mengele</h3>
-                    <p>Infamously known as the "Angel of Death," Mengele was a physician at Auschwitz who performed horrific "scientific" studies on prisoners. He was responsible for the selection process, deciding who was forced into the gas chambers.</p>
+            <div class="profile-card reveal">
+                <span class="role">The Architect</span>
+                <h4>Joseph Goebbels</h4>
+                <p>Chief of Propaganda and a master of psychological manipulation. He revolutionized the use of radio and film to sway public opinion, famously comparing the press to a keyboard for government execution.</p>
+                <div class="quote">
+                    "Think of the press as a great keyboard on which the government can play."
                 </div>
+            </div>
+
+            <div class="profile-card reveal">
+                <span class="role">The Perpetrator</span>
+                <h4>Dr. Josef Mengele</h4>
+                <p>A high-ranking SS physician whose actions at Auschwitz remain a dark testament to the era's medical atrocities. He led the selection process, masquerading pseudoscience as research.</p>
             </div>
         </div>
     </section>
 
     <section id="isolation">
-        <div class="container">
-            <h2 class="reveal">FDR & Isolationism</h2>
-            <div class="content-grid">
-                <div class="image-box reveal">
-                    <img id="img-propaganda" src="@assets/stock_images/vintage-propaganda-poster-archive.jpg" alt="Vintage Style Archive">
-                </div>
-                <div class="text-block reveal">
-                    <p>
-                        Across the Atlantic, Franklin D. Roosevelt faced a nation deeply entrenched in isolationism. The trauma of WWI had left Americans wary of foreign entanglements, leading to an age of political and social detachment from European conflicts.
-                    </p>
-                    <p>
-                        Despite this, FDR worked to prepare the "Arsenal of Democracy," navigating a complex political landscape where the threat of totalitarianism grew stronger every day.
-                    </p>
-                </div>
+        <div class="section-header reveal">
+            <h2>The Global Response</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="grid reverse">
+            <div class="text-content reveal">
+                <h3>FDR & Isolationism</h3>
+                <p>
+                    While the shadow grew in Europe, the United States remained locked in a struggle between global responsibility and isolationist sentiment. President Franklin D. Roosevelt navigated a delicate path, slowly preparing the "Arsenal of Democracy" while respecting a public wary of foreign conflict.
+                </p>
+                <p>
+                    This period of isolationism defined American foreign policy until the dramatic events of the early 1940s forced a total mobilization of resources and manpower.
+                </p>
+            </div>
+            <div class="visual-container reveal">
+                <img src="https://images.unsplash.com/photo-1512402947119-6f7773295244?q=80&w=1200&auto=format&fit=crop" alt="Typewriter and Documents">
             </div>
         </div>
     </section>
 
     <footer>
-        <p style="margin-bottom: 2rem; color: #888;">&copy; 2026 Historical Educational Archive</p>
-        <div>
-            <a href="https://www.pbs.org/wgbh/americanexperience/features/goebbels-hitler/" class="source-link">PBS Sources</a>
-            <a href="https://winstonchurchill.org/" class="source-link">Churchill Archive</a>
-            <a href="https://wikipedia.org" class="source-link">Wikipedia</a>
+        <div class="footer-nav">
+            <a href="https://www.pbs.org/wgbh/americanexperience/features/goebbels-hitler/" target="_blank">PBS Archive</a>
+            <a href="https://winstonchurchill.org/" target="_blank">Churchill Society</a>
+            <a href="https://wikipedia.org" target="_blank">Historical Database</a>
         </div>
+        <p class="copyright">Historical Educational Overview &copy; 2026</p>
     </footer>
 
     <script>
-        // Intersection Observer for Smooth Reveals
+        // Smooth Intersection Observer for Professional Reveals
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Image Handling from Stock API (mapping to IDs)
-        // Note: In a real app we'd use the actual paths from the tool
-        // For this demo, I've used curated Unsplash IDs that match the theme
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
