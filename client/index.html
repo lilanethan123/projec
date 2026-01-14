@@ -39,8 +39,10 @@
           position: absolute;
           inset: 0;
           overflow: hidden;
-          /* Scale up to hide UI elements if parameters aren't enough */
-          transform: scale(1.12);
+          /* Maximum aggressive scale to crop out ALL YouTube UI/logos from every edge */
+          transform: scale(3.5); 
+          pointer-events: none;
+          z-index: 0;
         }
 
         .yt-bg {
@@ -51,8 +53,6 @@
           height: 100vh;
           transform: translate(-50%, -50%);
           border: 0;
-
-          /* stops hover/click overlays from appearing */
           pointer-events: none;
         }
 
@@ -64,7 +64,7 @@
             left: 0;
             border: 0;
             pointer-events: none;
-            transform: translateZ(0);
+            transform: translateZ(0) scale(2.0);
         }
 
         /* For super-wide screens, switch scaling so it still covers */
@@ -159,19 +159,23 @@
             text-align: center;
             background: radial-gradient(circle at center, rgba(150,0,0,0.1) 0%, rgba(5,5,5,1) 70%);
             position: relative;
+            margin-bottom: 20rem; /* Space after hero video */
         }
 
         .hero h1 { font-size: 8vw; line-height: 1; margin-bottom: 2rem; }
         .hero .char { 
             display: inline-block; 
             opacity: 0; 
-            transform: translateY(100px);
-            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
-            will-change: transform, opacity;
+            transform: translateY(400px) scale(0) rotate(180deg);
+            filter: blur(40px);
+            transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 3s ease,
+                        filter 2.5s ease;
+            will-change: transform, opacity, filter;
         }
 
         /* Dramatic Content Sections */
-        section { padding: 15rem 10% 10rem; position: relative; }
+        section { padding: 25rem 10% 20rem; position: relative; }
         
         /* Dramatic Section Numbers */
         .section-num { 
@@ -191,20 +195,55 @@
             transform: translateX(20px);
         }
 
-        /* Reveal Animation - Dramatic Upgrade */
+        /* Reveal Animation - Super Dramatic Upgrade */
         .reveal { 
             opacity: 0; 
-            transform: scale(0.95) translateY(100px); 
-            filter: blur(10px);
-            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 1.2s ease;
+            transform: scale(0.3) translateY(500px) rotateX(60deg) rotateZ(-15deg); 
+            filter: blur(80px);
+            transition: opacity 3.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 4s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 3.5s ease;
             will-change: transform, opacity, filter;
         }
         .reveal.active { 
             opacity: 1; 
-            transform: scale(1) translateY(0); 
+            transform: scale(1) translateY(0) rotateX(0deg) rotateZ(0deg); 
             filter: blur(0);
+        }
+
+        /* Hero Char Animation - Explosive Entrance */
+        .hero .char { 
+            display: inline-block; 
+            opacity: 0; 
+            transform: translateY(100px) scale(0.5);
+            filter: blur(20px);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 1s ease,
+                        filter 1s ease;
+            will-change: transform, opacity, filter;
+        }
+
+        .hero .char.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* Fascism Definition Style */
+        .definition-box {
+            border: 1px solid var(--accent-color);
+            padding: 3rem;
+            margin: 4rem 0;
+            background: rgba(211, 47, 47, 0.05);
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+        .definition-box h4 {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
 
         /* Dramatic Image Zoom Reveal */
@@ -239,6 +278,11 @@
         /* Layout */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
         .sticky-col { position: sticky; top: 10rem; }
+
+        .video-hero, .img-container {
+            margin: 12rem 0;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+        }
 
         /* Witness Cards - Horizontal Scroll */
         .witness-wrapper {
@@ -343,6 +387,10 @@
                 <p class="muted-text">1918 — 1921</p>
             </div>
             <div class="text-block reveal">
+                <div class="definition-box">
+                    <h4>Definition: Fascism</h4>
+                    <p>Fascism is a far-right, authoritarian political ideology emphasizing extreme nationalism, a strong centralized state, dictatorial leadership, and the suppression of opposition, often promoting militarism and prioritizing the nation or race above the individual.</p>
+                </div>
                 <p>Following the humiliation of the Treaty of Versailles, Germany entered a state of profound economic and social paralysis. From the ashes of the Great War, Adolf Hitler emerged—not as a politician, but as a voice for the disenfranchised.</p>
                 <p>Born in April 1889, Hitler moved to Germany in 1892. By 1918, he had joined the DAP, quickly becoming their most formidable orator. He renamed the group to the National Socialist German Workers' Party (NSDAP), utilizing a mix of populist rhetoric and calculated threats of resignation to secure absolute leadership by 1921.</p>
                 <p>WWI soldiers returned with injuries and brought a pandemic that killed more people than the war itself. The roaring 20's followed as a prosperous time, but it was built on credit—a fragile foundation for the catastrophe to come.</p>
@@ -523,8 +571,7 @@
 
             setTimeout(() => {
                 document.querySelectorAll('.char').forEach(char => {
-                    char.style.opacity = '1';
-                    char.style.transform = 'translateY(0)';
+                    char.classList.add('active');
                 });
             }, 100);
         }
